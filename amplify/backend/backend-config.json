@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "sfridge43f2f067": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
