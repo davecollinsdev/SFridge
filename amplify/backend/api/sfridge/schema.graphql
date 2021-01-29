@@ -1,0 +1,7 @@
+type FridgeReading @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  temperature: Float!
+  humidity: Float
+  datetime: AWSDateTime
+}
+ 
