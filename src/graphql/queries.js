@@ -28,8 +28,6 @@ export const listFridgeReadings = /* GraphQL */ `
         id
         temperature
         humidity
-        datetime
-        type
         createdAt
         _version
         _deleted
@@ -59,8 +57,6 @@ export const syncFridgeReadings = /* GraphQL */ `
         temperature
         humidity
         datetime
-        type
-        createdAt
         _version
         _deleted
         _lastChangedAt

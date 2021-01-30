@@ -5,6 +5,9 @@ import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import { DataStore, Predicates, SortDirection } from 'aws-amplify'
 import { FridgeReading } from './models';
 
+import { API } from 'aws-amplify';
+import * as queries from './graphql/queries';
+
 function App() {
   const [latestReading, setLatestReading] = useState([]);
 
@@ -13,11 +16,16 @@ function App() {
   }, []);
 
   async function fetchFridgeReadings() {
+    
     const apiData = await DataStore.query(FridgeReading, Predicates.ALL, {
       sort: s => s.datetime(SortDirection.DESCENDING)
     });
 
     console.log(apiData);
+
+    const res = await API.graphql({ query: queries.listFridgeReadings });
+    console.log(res.data.listFridgeReadings.items);
+
     setLatestReading(apiData[0]);
   }
 
