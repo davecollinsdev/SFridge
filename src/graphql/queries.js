@@ -29,6 +29,7 @@ export const listFridgeReadings = /* GraphQL */ `
         temperature
         humidity
         createdAt
+        datetime
         _version
         _deleted
         _lastChangedAt
