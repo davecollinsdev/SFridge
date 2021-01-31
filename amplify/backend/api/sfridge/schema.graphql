@@ -1,7 +1,14 @@
-type FridgeReading @model @auth(rules: [{allow: public}]) {
+type FridgeReading @model @auth(rules: [{allow: public}])
+@key(
+  name: "byDateTime"
+  fields: ["type", "datetime"]
+  queryField: "fridgeReadingsByDateTime"
+)
+ {
   id: ID!
   temperature: Float!
-  humidity: Float
-  datetime: AWSDateTime
+  humidity: Float!
+  datetime: AWSDateTime!
+  type: String
 }
  

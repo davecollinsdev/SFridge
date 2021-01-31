@@ -9,10 +9,10 @@ export const getFridgeReading = /* GraphQL */ `
       humidity
       datetime
       type
-      createdAt
       _version
       _deleted
       _lastChangedAt
+      createdAt
       updatedAt
     }
   }
@@ -28,11 +28,46 @@ export const listFridgeReadings = /* GraphQL */ `
         id
         temperature
         humidity
-        createdAt
         datetime
+        type
         _version
         _deleted
         _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const fridgeReadingsByDateTime = /* GraphQL */ `
+  query FridgeReadingsByDateTime(
+    $type: String
+    $datetime: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelFridgeReadingFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    fridgeReadingsByDateTime(
+      type: $type
+      datetime: $datetime
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        temperature
+        humidity
+        datetime
+        type
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
         updatedAt
       }
       nextToken
@@ -58,9 +93,11 @@ export const syncFridgeReadings = /* GraphQL */ `
         temperature
         humidity
         datetime
+        type
         _version
         _deleted
         _lastChangedAt
+        createdAt
         updatedAt
       }
       nextToken

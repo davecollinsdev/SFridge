@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 
-import { DataStore, Predicates, SortDirection } from 'aws-amplify'
-import { FridgeReading } from './models';
+import { graphqlOperation, API } from 'aws-amplify'
+import { fridgeReadingsByDateTime } from './graphql/queries';
 
-import { API } from 'aws-amplify';
-import * as queries from './graphql/queries';
+import moment from 'moment-timezone'
 
 function App() {
   const [latestReading, setLatestReading] = useState([]);
@@ -16,17 +15,19 @@ function App() {
   }, []);
 
   async function fetchFridgeReadings() {
+    const resp = await API.graphql(graphqlOperation(fridgeReadingsByDateTime,
+      {
+        sortDirection: 'DESC',
+        type: 'FridgeReading',
+        limit: 1
+      }));
+
+    console.log(resp.data?.fridgeReadingsByDateTime.items);
+
+    let reading = resp.data.fridgeReadingsByDateTime.items[0];
+    reading.datetime = moment(reading.datetime).tz('America/New_York').format('MMMM Do YYYY, h:mm:ss A');
     
-    const apiData = await DataStore.query(FridgeReading, Predicates.ALL, {
-      sort: s => s.datetime(SortDirection.DESCENDING)
-    });
-
-    console.log(apiData);
-
-    const res = await API.graphql({ query: queries.listFridgeReadings });
-    console.log(res.data.listFridgeReadings.items);
-
-    setLatestReading(apiData[0]);
+    setLatestReading(reading);
   }
 
   return (
@@ -34,12 +35,15 @@ function App() {
       <h1>Smart Fridge</h1>
       <div style={{marginBottom: 24, display: "inline-flex"}}>
         <table>
+        <tbody>
         <tr>
-        <th>Temperature</th><th>Humidity</th><th>DateTime</th>
+        <th>Temperature</th><th>Humidity</th><th>Date</th>
         </tr>
         <tr>
-        <td>{latestReading?.temperature}</td><td>{latestReading?.humidity}</td><td>{latestReading?.datetime}</td>
+        <td>{latestReading?.temperature}</td><td>{latestReading?.humidity}</td><td>
+          { latestReading?.datetime }</td>
         </tr>
+        </tbody>
         </table>
       </div>
 

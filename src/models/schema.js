@@ -21,13 +21,20 @@ export const schema = {
                     "name": "humidity",
                     "isArray": false,
                     "type": "Float",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "datetime": {
                     "name": "datetime",
                     "isArray": false,
                     "type": "AWSDateTime",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "type": {
+                    "name": "type",
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 }
@@ -38,6 +45,17 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byDateTime",
+                        "fields": [
+                            "type",
+                            "datetime"
+                        ],
+                        "queryField": "fridgeReadingsByDateTime"
+                    }
                 },
                 {
                     "type": "auth",
@@ -60,5 +78,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "231e43d3abd717361ece8e96d44a431b"
+    "version": "de734c178c7ca233d8ae27cf003b6062"
 };

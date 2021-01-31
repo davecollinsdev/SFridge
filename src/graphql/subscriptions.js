@@ -9,10 +9,10 @@ export const onCreateFridgeReading = /* GraphQL */ `
       humidity
       datetime
       type
-      createdAt
       _version
       _deleted
       _lastChangedAt
+      createdAt
       updatedAt
     }
   }
@@ -25,10 +25,10 @@ export const onUpdateFridgeReading = /* GraphQL */ `
       humidity
       datetime
       type
-      createdAt
       _version
       _deleted
       _lastChangedAt
+      createdAt
       updatedAt
     }
   }
@@ -41,10 +41,10 @@ export const onDeleteFridgeReading = /* GraphQL */ `
       humidity
       datetime
       type
-      createdAt
       _version
       _deleted
       _lastChangedAt
+      createdAt
       updatedAt
     }
   }
