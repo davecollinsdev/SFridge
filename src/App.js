@@ -16,6 +16,13 @@ function App() {
     // Fetch readings on load
     fetchFridgeReadings();
 
+    // Makes a call to fetch latest reading only if auto refresh is enabled
+    function refreshIntervalHandler() {
+      if (autoRefreshEnabled) {
+        fetchFridgeReadings();
+      }
+    }
+
     // Set an interval to call our refresh handler ever 3000ms
     const interval = setInterval(() => refreshIntervalHandler(), 3000);
 
@@ -25,13 +32,6 @@ function App() {
     };
     // tell component to reload when the value of auto refersh enabled is changed
   }, [autoRefreshEnabled]);
-
-  // Make a call to fetch latest reading if auto refresh is enabled
-  function refreshIntervalHandler() {
-    if (autoRefreshEnabled) {
-      fetchFridgeReadings();
-    }
-  }
 
   // Makes a call to our GraphQL API to get the latest fridge reading (sorted by datetime, with limit of 1).
   async function fetchFridgeReadings() {
