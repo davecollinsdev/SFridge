@@ -9,6 +9,7 @@ import moment from 'moment-timezone'
 
 function App() {
   const [latestReading, setLatestReading] = useState([]);
+  const [autoRefreshEnabled, setAutoRefresh] = useState(true);
 
   useEffect(() => {
     fetchFridgeReadings();
@@ -30,6 +31,10 @@ function App() {
     setLatestReading(reading);
   }
 
+  function handleAutoRefreshChange(event) {
+    setAutoRefresh(event.target.checked);
+  }
+
   return (
     <div className="App">
       <h1>Smart Fridge</h1>
@@ -47,12 +52,24 @@ function App() {
         </table>
       </div>
 
-      <div>
-      <button className="refreshButton"
-      onClick={fetchFridgeReadings}
-      >
+      <div className="buttonsDiv">
+        <label className="inputLabel">
+          <span className="checkboxSpan">Auto Refresh</span>
+          <input
+          type="checkbox"
+          className="inputBox"
+          onChange={handleAutoRefreshChange}
+          checked={autoRefreshEnabled}>
+          </input>
+        </label>
+      { !autoRefreshEnabled &&
+        <button
+          className="refreshButton"
+          onClick={fetchFridgeReadings}
+        >
           Refresh
         </button>
+      }
       </div>
 
       <AmplifySignOut />

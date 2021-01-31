@@ -8,11 +8,33 @@ table, th, td {
   background-color: blue;
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 10px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  margin-left: 34px;
+}
+
+.inputBox{
+  width: 1.4em;
+  height: 1.4em;
+  margin-left: 8px;
+}
+
+.inputLabel{
+  display: flex;
+  align-items: baseline;
+}
+
+.checkboxSpan{
+  font-size: 1.4em;
+}
+
+.buttonsDiv{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 24px;
 }
 
