@@ -69,7 +69,7 @@ function App() {
         <th>Temperature</th><th>Humidity</th><th>Date</th>
         </tr>
         <tr>
-        <td>{latestReading?.temperature}</td><td>{latestReading?.humidity}</td><td>
+        <td>{latestReading?.temperature}&deg;C</td><td>{latestReading?.humidity}%</td><td>
           { latestReading?.datetime }</td>
         </tr>
         </tbody>
